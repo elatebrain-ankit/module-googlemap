@@ -1,0 +1,28 @@
+<div class="ebgooglemap-container">
+    <div id="<?php echo $block->getMapId() ?>" class="ebgooglemap" style="width:<?php echo $block->getWidth(); ?>; height:<?php echo $block->getHeight(); ?>"></div>
+</div>
+
+<script>
+    require([
+        "https://maps.googleapis.com/maps/api/js?&key=<?php echo $block->getMapApiKey(); ?>"
+    ], function () {
+        var mapLatLng = new google.maps.LatLng(<?php echo $block->getLatitude(); ?>, <?php echo $block->getLongitude(); ?>);
+        var mapOptions = {
+            draggable: <?php echo ($block->allowDragging() == 1)? 'true' : 'false'; ?>,
+            zoom: <?php echo $block->getZoomLevel(); ?>,
+            center: mapLatLng,
+            mapTypeId: '<?php echo $block->getMapType(); ?>'
+        };
+
+        // draw map
+        var amMap = new google.maps.Map(document.getElementById("<?php echo $block->getMapId() ?>"), mapOptions);
+
+        // add Marker to map
+        var marker = new google.maps.Marker({
+            position: mapLatLng,
+            map: amMap,
+            animation: google.maps.Animation.DROP,
+            title: "<?php echo $block->getTitle(); ?>"
+        });
+    });
+</script>

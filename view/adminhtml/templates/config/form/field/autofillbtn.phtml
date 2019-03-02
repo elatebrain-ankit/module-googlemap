@@ -1,0 +1,39 @@
+<input id="ebgooglemapautofill" data-ui-id="button-groups-coordinates-fields-autofill-value" value="<?php echo __('Fetch Latitude &amp; Longitude from Google') ?>" class="" type="button">
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $('#ebgooglemapautofill').click(function () {
+            var address = $('input#ebgooglemap_location_address').val();
+            var apiKey = $('input#ebgooglemap_general_api_key').val();
+
+            $.ajax({
+                url: 'https://maps.googleapis.com/maps/api/geocode/json',
+                type: 'GET',
+                showLoader: true,
+                data: {"address": address, "key": apiKey},
+                success: function (response) {
+                    if (response.error_message) {
+                        console.log(response.error_message);
+                        return;
+                    }
+
+                    if (response.results.length < 1) {
+                        console.log("<?php echo __('Result is empty. Address is Invalid.') ?>");
+                        return;
+                    }
+                    $('input#ebgooglemap_location_latitude').val(response.results[0].geometry.location.lat);
+                    $('input#ebgooglemap_location_longitude').val(response.results[0].geometry.location.lng);
+                },
+                error: function (XHR, exception) {
+                    if (XHR.responseText) {
+                        var response = JSON.parse(XHR.responseText);
+                        console.log(response.error_message);
+                        return;
+                    }
+                }
+            })
+        });
+    });
+</script>

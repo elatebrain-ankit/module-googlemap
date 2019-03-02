@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+  ElateBrain
+
+  NOTICE OF LICENSE
+
+  This source file is subject to the elatebrain.com license which is available at https://www.elatebrain.com/LICENSE.txt
+
+  DISCLAIMER
+
+  Do not edit or add to this file if you wish to upgrade this extension to newer version in the future.
+  If you wish to customize this extension for your needs, please refer to https://magento.com for more information.
+
+  @category    Elatebrain
+  @package     Elatebrain_GoogleMap
+  @version     1.0.1
+  @copyright   Copyright (c) 2019 Elatebrain (https://www.elatebrain.com/)
+  @license     https://www.elatebrain.com/LICENSE.txt
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main">
+            <block class="Elatebrain\GoogleMap\Block\Gmap" name="ebgooglemap.top" template="Elatebrain_GoogleMap::gmap.phtml" ifconfig="ebgooglemap/general/enabled" before="-"/>
+            <block class="Elatebrain\GoogleMap\Block\Gmap" name="ebgooglemap.bottom" template="Elatebrain_GoogleMap::gmap.phtml" ifconfig="ebgooglemap/general/enabled" after="-"/>
+        </referenceContainer>
+    </body>
+</page>
